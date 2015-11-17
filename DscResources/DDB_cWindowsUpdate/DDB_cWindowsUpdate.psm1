@@ -42,7 +42,7 @@ Data LocalizedData
 '@
 }
 
-$CacheLocation = "$env:ProgramData\Microsoft\Windows\PowerShell\Configuration\BuiltinProvCache\cWindowsUpdate"
+$CacheLocation = "$env:ProgramData\Microsoft\Windows\PowerShell\Configuration\BuiltinProvCache\MSFT_xWindowsUpdate"
 
 # Get-TargetResource function  
 function Get-TargetResource
@@ -57,10 +57,7 @@ function Get-TargetResource
 
         [parameter(Mandatory = $true)]
         [System.String]
-        $Id,
-
-		[System.Boolean]
-		$Reboot = $false
+        $Id
     )
     Set-StrictMode -Version latest
 
@@ -127,10 +124,7 @@ function Set-TargetResource
         [System.String]
         $Ensure='Present',
 
-        [pscredential] $Credential,
-
-		[System.Boolean]
-		$Reboot = $false
+        [pscredential] $Credential
 
     )
     Set-StrictMode -Version latest
@@ -186,11 +180,6 @@ function Set-TargetResource
         # This seems to be broken
         $global:DSCMachineStatus = 1        
     }
-    
-    if ($Reboot)
-    {
-        $global:DSCMachineStatus = 1
-    }
             
     
 }
@@ -218,10 +207,7 @@ function Test-TargetResource
         [System.String]
         $Ensure='Present',
 
-        [pscredential] $Credential,
-
-		[System.Boolean]
-		$Reboot = $false
+        [pscredential] $Credential
     )
     Set-StrictMode -Version latest
     Write-Verbose "$($LocalizedData.TestingEnsure -f ${Ensure})"
